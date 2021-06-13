@@ -12,6 +12,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
+      cost: {
+        type: Sequelize.DOUBLE,
+        allowNull: false
+      },
       productId: {
         type: Sequelize.INTEGER,
         references: {
@@ -26,16 +30,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: 'Providers',
-          key: 'id'
-        },
-        allowNull: false,
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
-      },
-      createBy: {
-        type: Sequelize.UUID,
-        references: {
-          model: 'Users',
           key: 'id'
         },
         allowNull: false,

@@ -1,4 +1,4 @@
-const { Provider } = require('../models');
+const { Provider, Address } = require('../models');
 
 const index = async (req, res) => {
   try {
@@ -11,18 +11,19 @@ const index = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-   const { name, corporateName, cnpj, contact, address, cep } = req.body;
-   const { userId } = req;
+   const { name, corporateName, cnpj, email, phoneNumber, address } = req.body;
+   const { neighborhood, street, number, state, city, cep } = address;
+   const providerAddress = await Address.create({ neighborhood, street, number, state, city, cep });
    const provider = await Provider.create({
      name,
      corporateName,
      cnpj,
-     contact,
+     email,
      address,
-     cep,
-     createBy: userId,
+     phoneNumber,
+     providerAddress,
    });
-   return res.status(201).json(provider);
+   return res.status(201).json({ provider });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -40,11 +41,10 @@ const show = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { name, corporateName, cnpj, contact, address, cep } = req.body;
-    const { userId } = req;
+    const { name, corporateName, cnpj, contact } = req.body;
     const { id } = req.params;
     const provider = await Provider.update(
-      { name, corporateName, cnpj, contact, address, cep, createBy: userId },
+      { name, corporateName, cnpj, contact },
       { where: { id } },
     );
     if (!provider) {

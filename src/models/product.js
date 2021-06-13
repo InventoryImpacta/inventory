@@ -3,8 +3,6 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     price: DataTypes.DOUBLE,
     quantity: DataTypes.DOUBLE,
-    unity: DataTypes.STRING,
-    sizes: DataTypes.STRING,
   },
   {
     timestamps: true,
@@ -14,9 +12,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Product.associate = (models) => {
     Product.belongsTo(models.Category,
-      { foreignKey: 'categoryId' });
-    Product.belongsTo(models.User,
-      { foreignKey: 'createBy', as: 'userId' });
+      { foreignKey: 'categoryId', as: 'category' });
     Product.hasOne(models.Purchase,
       { foreignKey: 'productId', as: 'product' });
   };

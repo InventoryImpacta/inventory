@@ -26,8 +26,9 @@ routes.route('/categories')
 .get(CategoryController.index);
 
 routes.route('/categories/:id')
-.get(CategoryController.show)
-.put(CategoryController.update);
+.get(auth, CategoryController.show)
+.delete(auth, CategoryController.deleteCategory)
+.put(auth, CategoryController.update);
 
 routes.route('/products')
 .post(auth, ProductsContoller.create)
@@ -38,7 +39,7 @@ routes.route('/products/:id')
 .put(auth, ProductsContoller.update);
 
 routes.route('/providers')
-.post(auth, ProvidersController.create)
+.post(ProvidersController.create)
 .get(auth, ProvidersController.index);
 
 routes.route('/providers/:id')

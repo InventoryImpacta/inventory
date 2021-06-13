@@ -4,8 +4,6 @@ const CategoryModel = (sequelize, DataTypes) => {
   });
 
   Category.associate = (models) => {
-    Category.belongsTo(models.User,
-      { foreignKey: 'createBy', as: 'user' });
     Category.hasOne(models.Product,
       { foreignKey: 'categoryId', as: 'category' });
   };

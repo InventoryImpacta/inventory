@@ -13,16 +13,6 @@ module.exports = {
         allowNull: false,
         unique: true
       },
-      createBy: {
-        type: Sequelize.UUID,
-        references: {
-          model: 'Users',
-          key: 'id'
-        },
-        allowNull: false,
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

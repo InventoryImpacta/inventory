@@ -12,15 +12,12 @@ const index = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    const { name, price, quantity, unity, categoryId, sizes } = req.body;
-    const { userId } = req;
+    const { name, price, quantity, categoryId, sizes } = req.body;
    const product = await Product.create({
      name,
      price,
      quantity,
-     unity,
      categoryId,
-     createBy: userId,
      sizes,
    });
    return res.status(201).json(product);
@@ -41,10 +38,10 @@ const show = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { name, price, quantity, unity, categoryId, sizes } = req.body;
+    const { name, price, quantity, categoryId } = req.body;
     const { id } = req.params;
     const updatedProduct = await Product.update(
-      { name, price, quantity, unity, categoryId, sizes },
+      { name, price, quantity, categoryId },
       { where: { id } },
     );
 

@@ -20,28 +20,10 @@ module.exports = {
         type: Sequelize.DOUBLE,
         allowNull: false
       },
-      sizes: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      unity: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
       categoryId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Categories',
-          key: 'id'
-        },
-        allowNull: false,
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
-      },
-      createBy: {
-        type: Sequelize.UUID,
-        references: {
-          model: 'Users',
           key: 'id'
         },
         allowNull: false,

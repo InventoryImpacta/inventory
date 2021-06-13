@@ -3,9 +3,8 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     corporateName: DataTypes.STRING,
     cnpj: DataTypes.STRING,
-    contact: DataTypes.STRING,
-    address: DataTypes.STRING,
-    cep: DataTypes.STRING,
+    email: DataTypes.STRING,
+    phoneNumber: DataTypes.STRING,
   },
   {
     timestamps: true,
@@ -14,10 +13,10 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Provider.associate = (models) => {
-    Provider.belongsTo(models.User,
-      { foreignKey: 'createBy', as: 'user' });
     Provider.hasOne(models.Purchase,
       { foreignKey: 'providerId', as: 'provider' });
+    Provider.belongsTo(models.Address,
+      { foreignKey: 'providerAddress', as: 'address' });
   };
 
   return Provider;

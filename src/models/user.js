@@ -16,14 +16,8 @@ const User = (sequelize, DataTypes) => {
   });
 
   User.associate = (models) => {
-    User.hasOne(models.Category,
-      { foreignKey: 'createBy', as: 'userId' });
-    User.hasOne(models.Product,
-      { foreignKey: 'createBy', as: 'createBy' });
-    User.hasOne(models.Provider,
-      { foreignKey: 'createBy', as: 'user' });
-    User.hasOne(models.Purchase,
-      { foreignKey: 'createBy', as: 'seller' });
+    User.hasOne(models.Sale,
+      { foreignKey: 'sellerId', as: 'seller' });
   };
 
   User.addHook('beforeSave', async (user) => {
