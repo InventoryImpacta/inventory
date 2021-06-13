@@ -1,5 +1,5 @@
 {
-  "name": "backend-impacta",
+  "name": "projeto-impacta",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Pietro, Djalma, Kelvin, Wesley - Kings of Code",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
