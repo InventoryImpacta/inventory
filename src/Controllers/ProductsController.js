@@ -54,4 +54,16 @@ const update = async (req, res) => {
   }
 };
 
-module.exports = { create, index, show, update };
+const deleteProd = async (req, res) => {
+  try{
+    const { id } = req.params;
+    await Product.destroy(
+      { where: { id } },
+    );
+    return res.status(200).json({ success: 'Product deleted successfully' });
+  } catch (error) {
+    return res.status(401).json({ error: error.message });
+  }
+};
+
+module.exports = { create, index, show, update, deleteProd };

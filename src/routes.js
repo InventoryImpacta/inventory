@@ -36,7 +36,8 @@ routes.route('/products')
 
 routes.route('/products/:id')
 .get(auth, ProductsContoller.show)
-.put(auth, ProductsContoller.update);
+.put(auth, ProductsContoller.update)
+.delete(auth, ProductsContoller.deleteProd)
 
 routes.route('/providers')
 .post(ProvidersController.create)
