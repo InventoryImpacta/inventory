@@ -13,7 +13,7 @@ const create = async (req, res) => {
   try {
    const { name, corporateName, cnpj, email, phoneNumber, address } = req.body;
    const { neighborhood, street, number, state, city, cep } = address;
-   const providerAddress = await Address.create({ neighborhood, street, number, state, city, cep });
+   const { providerAddress } = await Address.create({ neighborhood, street, number, state, city, cep });
    const provider = await Provider.create({
      name,
      corporateName,

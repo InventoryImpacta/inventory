@@ -13,10 +13,10 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Provider.associate = (models) => {
-    Provider.hasOne(models.Purchase,
-      { foreignKey: 'providerId', as: 'provider' });
     Provider.belongsTo(models.Address,
       { foreignKey: 'providerAddress', as: 'address' });
+    Provider.hasOne(models.Purchase,
+      { foreignKey: 'providerId', as: 'provider' });
   };
 
   return Provider;
