@@ -15,10 +15,10 @@ const User = (sequelize, DataTypes) => {
     hashedPassword: DataTypes.STRING,
   });
 
-  User.associate = (models) => {
-    User.hasOne(models.Sale,
-      { foreignKey: 'sellerId', as: 'seller' });
-  };
+  // User.associate = (models) => {
+  //   User.hasOne(models.Sale,
+  //     { foreignKey: 'sellerId', as: 'seller' });
+  // };
 
   User.addHook('beforeSave', async (user) => {
     if (user.password){

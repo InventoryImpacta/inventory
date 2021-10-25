@@ -5,6 +5,8 @@ const CategoryController = require('./Controllers/CategoryController');
 const ProductsContoller = require('./Controllers/ProductsController');
 const ProvidersController = require('./Controllers/ProvidersController');
 const PurchasesController = require('./Controllers/PurchasesController');
+const SalesController = require('./Controllers/SalesController');
+const ClientController = require('./Controllers/ClientController');
 const auth = require('./middlewares/auth');
 
 const routes = Router();
@@ -54,5 +56,17 @@ routes.route('/purchases')
 routes.route('/purchases/:id')
 .get(auth, PurchasesController.show)
 .put(auth, PurchasesController.update);
+
+routes.route('/clients')
+.post(auth, ClientController.create)
+.get(auth, ClientController.index);
+
+routes.route('/sales')
+.post(auth, SalesController.create)
+.get(auth, SalesController.index);
+
+//routes.route('/sales/:id')
+//.get(auth, PurchasesController.show)
+//.put(auth, PurchasesController.update);
 
 module.exports = routes;

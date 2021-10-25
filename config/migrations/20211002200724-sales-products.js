@@ -32,7 +32,7 @@ exports.up = function(db) {
       onUpdate: 'CASCADE',
       onDelete: 'RESTRICT'
     },
-    quantiy: {
+    quantity: {
       type: 'string',
       allowNull: false,
     },

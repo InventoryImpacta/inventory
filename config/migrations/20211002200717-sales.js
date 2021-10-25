@@ -22,10 +22,6 @@ exports.up = function(db) {
       primaryKey: true,
       type: 'int'
     },
-    quantiy: {
-      type: 'string',
-      allowNull: false,
-    },
     clientId: {
       type: 'int',
       references: {
@@ -36,35 +32,21 @@ exports.up = function(db) {
       onUpdate: 'CASCADE',
       onDelete: 'RESTRICT'
     },
-    sellerId: {
-      type: 'string',
-      references: {
-        model: 'Users',
-        key: 'id'
-      },
-      allowNull: false,
-      onUpdate: 'CASCADE',
-      onDelete: 'RESTRICT'
-    },
     paymentMethod: {
       type: 'string',
-      allowNull: false,
-    },
-    installments: {
-      allowNull: false,
-      type: 'string'
-    },
-    notes: {
-      allowNull: false,
-      type: 'string'
+      allowNull: true,
     },
     createdAt: {
       allowNull: false,
       type: 'date'
     },
     updatedAt: {
-      allowNull: false,
+      allowNull: true,
       type: 'date'
+    },
+    isSaleComplete: {
+      allowNull: true,
+      type: 'boolean'
     }
   });
 };

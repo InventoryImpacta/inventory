@@ -5,7 +5,7 @@ const index = async (req, res) => {
   try {
     const categories = await Category.findAll();
 
-    return res.status(201).send(categories);
+    return res.status(200).send(categories);
   } catch (error) {
     return res.status(500).json(error);
   }
