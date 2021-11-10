@@ -65,8 +65,8 @@ routes.route('/sales')
 .post(auth, SalesController.create)
 .get(auth, SalesController.index);
 
-//routes.route('/sales/:id')
+routes.route('/sales/:id/salesCompleted')
 //.get(auth, PurchasesController.show)
-//.put(auth, PurchasesController.update);
+.put(auth, SalesController.updateSales);
 
 module.exports = routes;
