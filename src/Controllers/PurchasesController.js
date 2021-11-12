@@ -14,8 +14,8 @@ const create = async (req, res) => {
    const { quantity, productId, providerId } = req.body;
    const { userId } = req;
    const product = await Product.findByPk(productId);
-   const newQuantityProduct = product.quantity - quantity;
-   if (newQuantityProduct < 0) throw new Error('Invalid quantity');
+   const newQuantityProduct = product.quantity + quantity;
+   
    await Product.update({ quantity: newQuantityProduct }, { where: { id: productId } });
    const purchase = await Purchase.create({
       quantity,
