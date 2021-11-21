@@ -15,7 +15,7 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db) {
-  return db.createTable('Purchases', {
+  return db.createTable('PurchaseProducts', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -32,10 +32,14 @@ exports.up = function(db) {
       onUpdate: 'CASCADE',
       onDelete: 'RESTRICT'
     },
-    providerId: {
+    quantity: {
+      type: 'string',
+      allowNull: false,
+    },
+    purchaseId: {
       type: 'int',
       references: {
-        model: 'Providers',
+        model: 'Purchase',
         key: 'id'
       },
       allowNull: false,
@@ -54,7 +58,7 @@ exports.up = function(db) {
 };
 
 exports.down = function(db) {
-  return db.dropTable('Purchases');
+  return db.dropTable('PurchaseProducts');
 };
 
 exports._meta = {

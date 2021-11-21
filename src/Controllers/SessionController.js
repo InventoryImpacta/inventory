@@ -16,7 +16,7 @@ const create = async (req, res) => {
 
     const token = createToken({ id, email, role });
 
-    return res.status(200).json({ token });
+    return res.status(200).json({ token, role });
   } catch (error) {
     return res.status(401).json({ error: error.message });
   }

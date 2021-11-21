@@ -11,7 +11,7 @@ const index = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    const roles = ['admin', 'seller', 'stockist'];
+    const roles = ['admin', 'compra', 'venda', 'view', 'seller', 'stockist'];
    const { name, email, password, role } = req.body;
    if (!roles.find((permitedRoles) => role === permitedRoles)) throw new Error('Invalid role');
    const user = await User.create({
