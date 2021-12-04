@@ -8,4 +8,4 @@ server.use(express.json());
 server.use(cors());
 server.use(routes);
 
-server.listen(3022, () => console.log('Rodando...'));
+server.listen(3012, () => console.log('Rodando... na 3012'));
