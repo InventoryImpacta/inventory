@@ -7,7 +7,7 @@ const checkpassword = async (password, hashedPassword) => bcrypt.compare(passwor
 const create = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const { id, hashedPassword, role, isActive } = await User.findOne({ where: { email } });
+    const { id, hashedPassword, role, isActive, name } = await User.findOne({ where: { email } });
     if (!await checkpassword(password, hashedPassword)) {
       throw new Error('email or password invalid');
     }
@@ -16,7 +16,7 @@ const create = async (req, res) => {
 
     const token = createToken({ id, email, role });
 
-    return res.status(200).json({ token, role });
+    return res.status(200).json({ token, role, name, id });
   } catch (error) {
     return res.status(401).json({ error: error.message });
   }

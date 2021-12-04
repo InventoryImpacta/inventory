@@ -23,6 +23,9 @@ routes.route('/users/:id')
 .put(auth, UserController.update)
 .get(auth, UserController.show);
 
+routes.route('/users/:id/changePwd')
+.put(auth, UserController.changePwd)
+
 routes.route('/categories')
 .post(CategoryController.create)
 .get(CategoryController.index);
@@ -47,7 +50,8 @@ routes.route('/providers')
 
 routes.route('/providers/:id')
 .get(auth, ProvidersController.show)
-.put(auth, ProvidersController.update);
+.put(auth, ProvidersController.update)
+.delete(auth, ProvidersController.deleteProv)
 
 routes.route('/purchases')
 .post(auth, PurchasesController.create)
@@ -55,11 +59,15 @@ routes.route('/purchases')
 
 routes.route('/purchases/:id')
 .get(auth, PurchasesController.show)
-.put(auth, PurchasesController.update);
+.put(auth, PurchasesController.update)
 
 routes.route('/clients')
 .post(auth, ClientController.create)
 .get(auth, ClientController.index);
+
+routes.route('/clients/:id')
+.put(auth, ClientController.update)
+.delete(auth, ClientController.deleteClient)
 
 routes.route('/sales')
 .post(auth, SalesController.create)

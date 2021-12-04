@@ -1,4 +1,5 @@
 const { User } = require('../models');
+const bcrypt = require('bcrypt');
 
 const index = async (req, res) => {
   try {
@@ -53,4 +54,22 @@ const update = async (req, res) => {
   }
 };
 
-module.exports = { index, create, show, update };
+const changePwd = async (req, res) => {
+  try {
+    const { password } = req.body;
+    const { id } = req.params;
+    const hashedPassword = await bcrypt.hash(password, 8)
+    const updatedUser = await User.update(
+      { hashedPassword },
+      { where: { id } },
+    );
+    if (!updatedUser) {
+      throw new Error('User not found');
+    }
+    return res.status(200).json({ success: 'User updated successfully' });
+  } catch (error) {
+    return res.status(401).json({ error: error.message });
+  }
+};
+
+module.exports = { index, create, show, update, changePwd };
