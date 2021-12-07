@@ -1,4 +1,4 @@
-const { Product } = require('../models');
+const { Product, ProductsHistory } = require('../models');
 
 const index = async (req, res) => {
   try {
@@ -20,6 +20,11 @@ const create = async (req, res) => {
      categoryId,
      sizes,
    });
+   await ProductsHistory.create({
+    name : name,
+    price,
+    originalId: product.id
+   })
    return res.status(201).json(product);
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -44,6 +49,12 @@ const update = async (req, res) => {
       { name, price, quantity, categoryId },
       { where: { id } },
     );
+
+    await ProductsHistory.create({
+      name : name,
+      price,
+      originalId: id
+     })
 
     if (!updatedProduct) {
       throw new Error('Product not found');

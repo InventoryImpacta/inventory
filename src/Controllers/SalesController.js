@@ -1,4 +1,4 @@
-const { Sale, Product, SalesProduct, Client } = require('../models');
+const { Sale, Product, SalesProduct, Client, ProductsHistory } = require('../models');
 
 const index = async (req, res) => {
   try {
@@ -6,9 +6,9 @@ const index = async (req, res) => {
     const saleProducts = await SalesProduct.findAll()
     const products = await Product.findAll();
     const clients = await Client.findAll();
-
+    var productsHistory = await ProductsHistory.findAll()
     newSales = []
-
+    productsHistory = productsHistory.sort(function(a,b) {return (b.createdAt > a.createdAt) ? 1 : ((a.createdAt > b.createdAt) ? -1 : 0);} );
     sales.map(s => {
       let ns = { ...s.dataValues }
       ns['products'] = []
@@ -21,9 +21,20 @@ const index = async (req, res) => {
       saleProducts.map(sp => {
         if(sp.saleId == s.id) {
           let product = products.find(p => p.id == sp.productId)
+          //let prodHistory = productsHistory.find(p => p.originalId == sp.productId)
+          
+          
+          let prodHistory = productsHistory.find(p => {
+            if(p.originalId == sp.productId) {
+              if(s.createdAt > p.createdAt) {
+                return p
+              }
+            }
+          })
           ns.products.push({
             'product': product.dataValues,
-            'quantity': sp.quantity
+            'quantity': sp.quantity,
+            'prodHistory': prodHistory
           })
 
         

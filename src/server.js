@@ -9,3 +9,4 @@ server.use(cors());
 server.use(routes);
 
 server.listen(3012, () => console.log('Rodando... na 3012'));
+ 
