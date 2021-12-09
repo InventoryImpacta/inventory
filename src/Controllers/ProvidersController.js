@@ -41,10 +41,10 @@ const show = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { name, corporateName, cnpj, contact } = req.body;
+    const { name, corporateName, cnpj, contact, phoneNumber } = req.body;
     const { id } = req.params;
     const provider = await Provider.update(
-      { name, corporateName, cnpj, contact },
+      { name, corporateName, cnpj, contact, phoneNumber },
       { where: { id } },
     );
     if (!provider) {
