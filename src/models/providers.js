@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     cnpj: DataTypes.STRING,
     email: DataTypes.STRING,
     phoneNumber: DataTypes.STRING,
+    isActive: DataTypes.BOOLEAN
   },
   {
     timestamps: true,

@@ -35,6 +35,12 @@ routes.route('/categories/:id')
 .delete(auth, CategoryController.deleteCategory)
 .put(auth, CategoryController.update);
 
+routes.route('/categories/:id/enable')
+.put(auth, CategoryController.enable);
+
+routes.route('/categories/:id/disable')
+.put(auth, CategoryController.disable);
+
 routes.route('/products')
 .post(auth, ProductsContoller.create)
 .get(auth, ProductsContoller.index);
@@ -44,6 +50,13 @@ routes.route('/products/:id')
 .put(auth, ProductsContoller.update)
 .delete(auth, ProductsContoller.deleteProd)
 
+routes.route('/products/:id/enable')
+.put(auth, ProductsContoller.enable)
+
+routes.route('/products/:id/disable')
+.put(auth, ProductsContoller.disable)
+
+
 routes.route('/providers')
 .post(ProvidersController.create)
 .get(auth, ProvidersController.index);
@@ -52,6 +65,12 @@ routes.route('/providers/:id')
 .get(auth, ProvidersController.show)
 .put(auth, ProvidersController.update)
 .delete(auth, ProvidersController.deleteProv)
+
+routes.route('/providers/:id/enable')
+.put(auth, ProvidersController.enable)
+
+routes.route('/providers/:id/disable')
+.put(auth, ProvidersController.disable)
 
 routes.route('/purchases')
 .post(auth, PurchasesController.create)
@@ -68,6 +87,12 @@ routes.route('/clients')
 routes.route('/clients/:id')
 .put(auth, ClientController.update)
 .delete(auth, ClientController.deleteClient)
+
+routes.route('/clients/:id/enable')
+.put(auth, ClientController.enable)
+
+routes.route('/clients/:id/disable')
+.put(auth, ClientController.disable)
 
 routes.route('/sales')
 .post(auth, SalesController.create)

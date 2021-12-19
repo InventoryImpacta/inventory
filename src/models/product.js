@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     price: DataTypes.DOUBLE,
     quantity: DataTypes.DOUBLE,
+    isActive: DataTypes.BOOLEAN
   },
   {
     timestamps: true,

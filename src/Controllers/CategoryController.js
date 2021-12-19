@@ -22,6 +22,7 @@ const create = async (req, res) => {
     const { name } = req.body;
     const category = await Category.create({
       name,
+      isActive: true
     });
     return res.status(201).json(category);
     } catch (error) {
@@ -69,4 +70,43 @@ const deleteCategory = async (req, res) => {
   }
 };
 
-module.exports = { index, create, show, update, deleteCategory };
+const enable = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedCategory = await Category.update(
+      { 
+        isActive: true
+       },
+      { where: { id } },
+    );
+
+    if (!updatedCategory) {
+      throw new Error('Category not found');
+    }
+    return res.status(201).json({ success: 'Category updated successfully' });
+  } catch (error) {
+    return res.status(401).json({ error: error.message });
+  }
+};
+
+const disable = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedCategory = await Category.update(
+      { 
+        isActive: false
+       },
+      { where: { id } },
+    );
+
+    if (!updatedCategory) {
+      throw new Error('Category not found');
+    }
+    return res.status(201).json({ success: 'Category updated successfully' });
+  } catch (error) {
+    return res.status(401).json({ error: error.message });
+  }
+};
+
+
+module.exports = { index, create, show, update, deleteCategory, enable, disable };

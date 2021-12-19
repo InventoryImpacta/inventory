@@ -3,6 +3,7 @@ const ClientModel = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     email: DataTypes.STRING,
     phoneNumber: DataTypes.STRING,
+    isActive: DataTypes.BOOLEAN
   });
 
   Client.associate = (models) => {

@@ -19,6 +19,7 @@ const create = async (req, res) => {
      quantity,
      categoryId,
      sizes,
+     isActive: true
    });
    await ProductsHistory.create({
     name : name,
@@ -77,4 +78,43 @@ const deleteProd = async (req, res) => {
   }
 };
 
-module.exports = { create, index, show, update, deleteProd };
+const enable = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedCategory = await Product.update(
+      { 
+        isActive: true
+       },
+      { where: { id } },
+    );
+
+    if (!updatedCategory) {
+      throw new Error('Product not found');
+    }
+    return res.status(201).json({ success: 'Product updated successfully' });
+  } catch (error) {
+    return res.status(401).json({ error: error.message });
+  }
+};
+
+const disable = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedCategory = await Product.update(
+      { 
+        isActive: false
+       },
+      { where: { id } },
+    );
+
+    if (!updatedCategory) {
+      throw new Error('Product not found');
+    }
+    return res.status(201).json({ success: 'Product updated successfully' });
+  } catch (error) {
+    return res.status(401).json({ error: error.message });
+  }
+};
+
+
+module.exports = { create, index, show, update, deleteProd, enable, disable };

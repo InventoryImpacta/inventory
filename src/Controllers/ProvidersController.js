@@ -22,6 +22,7 @@ const create = async (req, res) => {
      address,
      phoneNumber,
      providerAddress,
+     isActive: true
    });
    return res.status(201).json({ provider });
   } catch (error) {
@@ -68,5 +69,43 @@ const deleteProv = async (req, res) => {
   }
 };
 
+const enable = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedCategory = await Provider.update(
+      { 
+        isActive: true
+       },
+      { where: { id } },
+    );
 
-module.exports = { create, index, show, update, deleteProv };
+    if (!updatedCategory) {
+      throw new Error('Provider not found');
+    }
+    return res.status(201).json({ success: 'Provider updated successfully' });
+  } catch (error) {
+    return res.status(401).json({ error: error.message });
+  }
+};
+
+const disable = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedCategory = await Provider.update(
+      { 
+        isActive: false
+       },
+      { where: { id } },
+    );
+
+    if (!updatedCategory) {
+      throw new Error('Provider not found');
+    }
+    return res.status(201).json({ success: 'Provider updated successfully' });
+  } catch (error) {
+    return res.status(401).json({ error: error.message });
+  }
+};
+
+
+module.exports = { create, index, show, update, deleteProv, enable, disable };

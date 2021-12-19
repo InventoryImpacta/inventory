@@ -17,7 +17,8 @@ const create = async (req, res) => {
       name, 
       email, 
       phoneNumber, 
-      clientAddress
+      clientAddress,
+      isActive: true
    });
    return res.status(201).json(client);
   } catch (error) {
@@ -59,4 +60,43 @@ const deleteClient = async (req, res) => {
 };
 
 
-module.exports = { index, create, update, deleteClient };
+const enable = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedCategory = await Client.update(
+      { 
+        isActive: true
+       },
+      { where: { id } },
+    );
+
+    if (!updatedCategory) {
+      throw new Error('Client not found');
+    }
+    return res.status(201).json({ success: 'Client updated successfully' });
+  } catch (error) {
+    return res.status(401).json({ error: error.message });
+  }
+};
+
+const disable = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedCategory = await Client.update(
+      { 
+        isActive: false
+       },
+      { where: { id } },
+    );
+
+    if (!updatedCategory) {
+      throw new Error('Client not found');
+    }
+    return res.status(201).json({ success: 'Client updated successfully' });
+  } catch (error) {
+    return res.status(401).json({ error: error.message });
+  }
+};
+
+
+module.exports = { index, create, update, deleteClient, enable, disable };
